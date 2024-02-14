@@ -1329,3 +1329,7 @@ async def manual_filters(client, message, text=False):
                 break
     else:
         return False
+
+@Client.on_message(filters.private & filters.text)
+async def private(client, message):
+    await auto_filter(client, message)
