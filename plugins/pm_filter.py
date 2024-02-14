@@ -558,10 +558,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer()
     elif query.data == "start":
         buttons = [[
-            InlineKeyboardButton('Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            InlineKeyboardButton('Channel Updates🍿', url="https://t.me/MOVIES_DATA_UPDATES"),
+            InlineKeyboardButton('Share now🚩', url='https://t.me/share/url?url=https%3A//t.me/Cat_movie_bot')
             ],[
-            InlineKeyboardButton('Hᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('Aʙᴏᴜᴛ', callback_data='about')
+            InlineKeyboardButton('Demo✨', url='https://t.me/BYPASS_DEMO_VIDEO')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
