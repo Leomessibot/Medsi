@@ -42,15 +42,8 @@ class temp(object):
     SETTINGS = {}
 
 def get_shortlink(chat_id, link):
-    settings = await get_settings(chat_id) #fetching settings for group
-    if 'shortlink' in settings.keys():
-        URL = settings['shortlink']
-    else:
-        URL = SHORTLINK_URL
-    if 'shortlink_api' in settings.keys():
-        API = settings['shortlink_api']
-    else:
-        API = SHORTLINK_API
+    URL = SHORTLINK_URL
+    API = SHORTLINK_API
     https = link.split(":")[0] #splitting https or http from link
     if "http" == https: #if https == "http":
         https = "https"
