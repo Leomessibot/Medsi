@@ -33,7 +33,7 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
         # Makes the bot a bit faster and also eliminates many issues realted to invite links.
         if INVITE_LINK is None:
             invite_link = (await bot.create_chat_invite_link(
-                chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL and JOIN_REQS_DB else REQ_CHANNEL),
+                chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL and not JOIN_REQS_DB else REQ_CHANNEL),
                 creates_join_request=True if REQ_CHANNEL and JOIN_REQS_DB else False
             )).invite_link
             INVITE_LINK = invite_link
@@ -72,6 +72,8 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
             return False
 
     try:
+        if not AUTH_CHANNEL:
+            raise UserNotParticipant
         # Check if User is Already Joined Channel
         user = await bot.get_chat_member(
                    chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL and JOIN_REQS_DB else REQ_CHANNEL), 
