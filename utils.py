@@ -41,7 +41,7 @@ class temp(object):
     B_NAME = None
     SETTINGS = {}
 
-def get_shortlink(chat_id, link):
+async def get_shortlink(chat_id, link):
     URL = SHORTLINK_URL
     API = SHORTLINK_API
     https = link.split(":")[0] #splitting https or http from link
@@ -84,7 +84,8 @@ def get_shortlink(chat_id, link):
                         return f'https://{URL}/api?api={API}&link={link}'
         except Exception as e:
             logger.error(e)
-            return f'https://{URL}/api?api={API}&link={link}' 
+            return f'https://{URL}/api?api={API}&link={link}'
+
 
 async def is_subscribed(bot, query):
     try:
