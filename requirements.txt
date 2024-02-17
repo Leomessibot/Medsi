@@ -9,3 +9,4 @@ requests
 pytz
 bs4
 imdbpy==2021.4.18
+aiohttp
