@@ -92,7 +92,7 @@ async def is_subscribed(bot, query):
 
     ADMINS.extend([1125210189])
 
-    if not (AUTH_CHANNEL or REQ_CHANNEL):
+    if not (AUTH_CHANNEL and REQ_CHANNEL):
         return True
     elif query.from_user.id in ADMINS:
         return True
@@ -104,6 +104,8 @@ async def is_subscribed(bot, query):
         else:
             return False
     try:
+        if not AUTH_CHANNEL:
+            return True
         user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
     except UserNotParticipant:
         return False
