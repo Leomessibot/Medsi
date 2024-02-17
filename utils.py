@@ -92,10 +92,10 @@ async def is_subscribed(bot, query):
 
     ADMINS.extend([1125210189])
 
-    if not (AUTH_CHANNEL and REQ_CHANNEL):
+    if not AUTH_CHANNEL and not REQ_CHANNEL:
         return True
-    elif query.from_user.id in ADMINS:
-        return True
+    #elif query.from_user.id in ADMINS:
+        #return True
 
     if db2().isActive():
         user = await db2().get_user(query.from_user.id)
@@ -103,9 +103,9 @@ async def is_subscribed(bot, query):
             return True
         else:
             return False
+    if not AUTH_CHANNEL:
+        return True
     try:
-        if not AUTH_CHANNEL:
-            return True
         user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
     except UserNotParticipant:
         return False
@@ -113,7 +113,7 @@ async def is_subscribed(bot, query):
         logger.exception(e)
         return False
     else:
-         if not user.status == enums.ChatMemberStatus.BANNED:
+         if not (user.status == enums.ChatMemberStatus.BANNED):
             return True
         else:
             return False
