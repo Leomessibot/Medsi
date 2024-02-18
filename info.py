@@ -66,8 +66,9 @@ FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
-SHORTLINK_URL = environ.get('SHORTLINK_URL', 'onepagelink.in')
-SHORTLINK_API = environ.get('SHORTLINK_API', 'd9021e1263d10c3a288f360f41c96e5426884193')
+
+#SHORTLINK_URL = environ.get('SHORTLINK_URL', 'onepagelink.in')
+#SHORTLINK_API = environ.get('SHORTLINK_API', 'd9021e1263d10c3a288f360f41c96e5426884193')
 
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
