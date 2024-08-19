@@ -1,5 +1,6 @@
 import re
 from os import environ
+import os
 
 id_pattern = re.compile(r'^.\d+$')
 def is_enabled(value, default):
@@ -51,6 +52,7 @@ LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-10022085701476'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'MOVIES_DATA_UPDATES')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', 'True')), False)
 IMDB = is_enabled((environ.get('IMDB', 'False')), False)
+PORT = os.environ.get("PORT", "8080")
 TEXT_FFILTER = is_enabled((environ.get('TEXT_FFILTER', "False")), False)
 AUTO_FFILTER = is_enabled((environ.get('AUTO_FFILTER', "True")), True)
 GRP_FFILTER = is_enabled((environ.get('GRP_FFILTER', "False")), False)
