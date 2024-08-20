@@ -63,7 +63,7 @@ async def start(client, message):
             )
         for file in files:
             me = await client.get_me()
-            base_str += f"\n\n<a href='https://t.me/{me.username}?start=file_{file.file_id}'>⏩ [{get_size(file.file_size)}] {file.file_name}</a>"
+            base_str += f"\n\n<a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>⏩ [{get_size(file.file_size)}] {file.file_name}</a>"
         return await ms.edit(base_str, reply_markup=InlineKeyboardMarkup(btn))
 
     files_ = await get_file_details(file_id)           
