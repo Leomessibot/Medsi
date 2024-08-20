@@ -48,7 +48,7 @@ PM = int(pm) if pm and id_pattern.search(pm) else None
 
 
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-10022085701476'))
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-4599697540'))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'MOVIES_DATA_UPDATES')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', 'True')), False)
 IMDB = is_enabled((environ.get('IMDB', 'False')), False)
