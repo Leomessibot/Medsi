@@ -163,11 +163,3 @@ async def on_restart_all_bots(client: Client, message: Message):
     await message.reply_text("ʀᴇꜱᴛᴀʀᴛɪɴɢ ᴀʟʟ ʙᴏᴛꜱ....🏹")
     await restart_bots()
     await message.reply_text("ᴀʟʟ ʙᴏᴛꜱ ʜᴀᴠᴇ ʙᴇᴇɴ ʀᴇꜱᴛᴀʀᴛᴇᴅ 🔋")  
-
-async def send_clone_file(client, file_id, f_caption):    
-    msg = await client.send_cached_media(        
-        chat_id=CLONE_FILE_CHANNEL,
-        file_id=file_id,
-        caption=CUSTOM_FILE_CAPTION,
-    )
-    return msg 
