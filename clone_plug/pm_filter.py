@@ -325,7 +325,7 @@ async def auto_filter(client, msg, spoll=False):
         )
         me = await client.get_me() 
     for file in files:
-        msg += f"<i>\n\n<a href='https://t.me/{me.username}?start=file_{file.file_id}'>⏩ [{get_size(file.file_size)}] {file.file_name}</a></i>"
+        msg += f"<i>\n\n<a href='https://t.me/{temp.U_NAME}?start=file_{file.file_id}'>⏩ [{get_size(file.file_size)}] {file.file_name}</a></i>"
     else:
         cap = f"<b>Hᴇʏ {message.from_user.mention} Yᴏᴜʀ Rᴇǫᴜᴇsᴛᴇᴅ Fɪʟᴇ Fᴏʀ {search} Is ʀᴇᴀᴅʏ Tᴏ Dᴏᴡɴʟᴏᴀᴅ Cʟɪᴄᴋ ᴛʜᴇ ʟɪɴᴋ ᴀɴᴅ ᴅᴏᴡɴʟᴏᴀᴅ🤓</b>"
     if imdb and imdb.get('poster'):
