@@ -23,43 +23,39 @@ class clonedme(object):
     U_NAME = None
     B_NAME = None
 
-@Client.on_message((filters.regex(r'\d[0-9]{8,10}:[0-9A-Za-z_-]{35}')) & filters.private)
-async def on_clone(self, message):
+@Client.on_message(filters.command('clone'))
+async def clone_menu(client, message):
+    if CLONE_MODE == False:
+        return 
+    if await db.is_clone_exist(message.from_user.id):
+        return await message.reply("**ʏᴏᴜ ʜᴀᴠᴇ ᴀʟʀᴇᴀᴅʏ ᴄʟᴏɴᴇᴅ ᴀ ʙᴏᴛ ᴅᴇʟᴇᴛᴇ ғɪʀsᴛ ɪᴛ ʙʏ /deleteclone**")
+    else:
+        pass
+    techvj = await client.ask(message.chat.id, "<b>1) sᴇɴᴅ <code>/newbot</code> ᴛᴏ @BotFather\n2) ɢɪᴠᴇ ᴀ ɴᴀᴍᴇ ꜰᴏʀ ʏᴏᴜʀ ʙᴏᴛ.\n3) ɢɪᴠᴇ ᴀ ᴜɴɪǫᴜᴇ ᴜsᴇʀɴᴀᴍᴇ.\n4) ᴛʜᴇɴ ʏᴏᴜ ᴡɪʟʟ ɢᴇᴛ ᴀ ᴍᴇssᴀɢᴇ ᴡɪᴛʜ ʏᴏᴜʀ ʙᴏᴛ ᴛᴏᴋᴇɴ.\n5) ꜰᴏʀᴡᴀʀᴅ ᴛʜᴀᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴇ.\n\n/cancel - ᴄᴀɴᴄᴇʟ ᴛʜɪs ᴘʀᴏᴄᴇss.</b>")
+    if techvj.text == '/cancel':
+        await techvj.delete()
+        return await message.reply('<b>ᴄᴀɴᴄᴇʟᴇᴅ ᴛʜɪs ᴘʀᴏᴄᴇss 🚫</b>')
+    if techvj.forward_from and techvj.forward_from.id == 93372553:
+        try:
+            bot_token = re.findall(r"\b(\d+:[A-Za-z0-9_-]+)\b", techvj.text)[0]
+        except:
+            return await message.reply('<b>sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ 😕</b>')
+    else:
+        return await message.reply('<b>ɴᴏᴛ ꜰᴏʀᴡᴀʀᴅᴇᴅ ꜰʀᴏᴍ @BotFather 😑</b>')
+    user_id = message.from_user.id
+    msg = await message.reply_text("**👨‍💻 ᴡᴀɪᴛ ᴀ ᴍɪɴᴜᴛᴇ ɪ ᴀᴍ ᴄʀᴇᴀᴛɪɴɢ ʏᴏᴜʀ ʙᴏᴛ ❣️**")
     try:
-        user_id = message.from_user.id
-        user_name = message.from_user.first_name
-        bot_token = re.findall(r'\d[0-9]{8,10}:[0-9A-Za-z_-]{35}', message.text, re.IGNORECASE)
-        bot_token = bot_token[0] if bot_token else None
-        bot_id = re.findall(r'\d[0-9]{8,10}', message.text)
-
-        if not str(message.forward_from.id) != "93372553":
-            msg = await message.reply_text(f" <code>{bot_token}</code>\n\n ♻️𝙰𝚖 𝚃𝚛𝚢𝚒𝚗𝚐 𝚃𝚘 𝙲𝚕𝚘𝚗𝚎 𝚄𝚛 𝙱𝚘𝚝 𝚆𝚊𝚒𝚝 𝙰 𝙼𝚒𝚗𝚞𝚝𝚎♻️")
-            try:
-                ai = Client(
-                    f"{bot_token}", API_ID, API_HASH,
-                    bot_token=bot_token,
-                    plugins={"root": "clone_plug"},
-                )
-                await ai.start()
-                bot = await ai.get_me()
-                details = {
-                    'bot_id': bot.id,
-                    'is_bot': True,
-                    'user_id': user_id,
-                    'name': bot.first_name,
-                    'token': bot_token,
-                    'username': bot.username
-                }
-                mongo_db.bots.insert_one(details)
-                clonedme.ME = bot.id
-                clonedme.U_NAME = bot.username
-                clonedme.B_NAME = bot.first_name
-                await msg.edit_text(f"𝚂𝚞𝚌𝚌𝚎𝚜𝚏𝚞𝚕𝚕𝚢 𝙲𝚕𝚘𝚗𝚎𝚍 𝚢𝚘𝚞𝚛 @{bot.username} .\n\n⚠️ <u>𝙳𝚘 𝙽𝚘𝚝 𝚂𝚎𝚗𝚍 𝚃𝚘 𝙰𝚗𝚢 𝙾𝚗𝚎</u> 𝚃𝚑𝚎 𝙼𝚎𝚜𝚜𝚊𝚐𝚎 𝚆𝚒𝚝𝚑 <u>𝚃𝚑𝚎 𝚃𝚘𝚔𝚎𝚗</u> 𝙾𝚏 𝚃𝚑𝚎 𝙱𝚘𝚝, 𝚆𝚑𝚘 𝙷𝚊𝚜 𝙸𝚝 𝙲𝚊𝚗 𝙲𝚘𝚗𝚝𝚛𝚘𝚕 𝚈𝚘𝚞𝚛 𝙱𝚘𝚝!\n<i>𝙸𝚏 𝚈𝚘𝚞 𝚃𝚑𝚒𝚗𝚔 𝚂𝚘𝚖𝚎𝚘𝚗𝚎 𝙵𝚘𝚞𝚗𝚍 𝙾𝚞𝚝 𝙰𝚋𝚘𝚞𝚝 𝚈𝚘𝚞𝚛 𝙱𝚘𝚝 𝚃𝚘𝚔𝚎𝚗, 𝙶𝚘 𝚃𝚘 @Botfather, 𝚄𝚜𝚎 /revoke 𝙰𝚗𝚍 𝚃𝚑𝚎𝚗 𝚂𝚎𝚕𝚎𝚌𝚝 @{bot.username}</i>")
-            except BaseException as e:
-                logging.exception("Error while cloning bot.")
-                await msg.edit_text(f"⚠️ <b>𝙱𝙾𝚃 𝙴𝚁𝚁𝙾𝚁:</b>\n\n<code>{e}</code>\n\n❔ 𝙵𝚘𝚛𝚠𝚊𝚛𝚍 𝚃𝚑𝚒𝚜 𝙼𝚎𝚜𝚜𝚊𝚐𝚎 𝚃𝚘 @Lallu_tgx 𝚃𝚘 𝙱𝚎 𝙵𝚒𝚡𝚎𝚍.")
-    except Exception as e:
-        logging.exception("Error while handling message.")
+        vj = Client(
+            f"{bot_token}", API_ID, API_HASH,
+            bot_token=bot_token,
+            plugins={"root": "clone_plug"}
+        )
+        await vj.start()
+        bot = await vj.get_me()
+        await db.add_clone_bot(bot.id, user_id, bot_token)
+        await msg.edit_text(f"<b>sᴜᴄᴄᴇssғᴜʟʟʏ ᴄʟᴏɴᴇᴅ ʏᴏᴜʀ ʙᴏᴛ: @{bot.username}.\n\nʏᴏᴜ ᴄᴀɴ ᴄᴜsᴛᴏᴍɪsᴇ ʏᴏᴜʀ ᴄʟᴏɴᴇ ʙᴏᴛ ʙʏ /settings ᴄᴏᴍᴍᴀɴᴅ ɪɴ ʏᴏᴜʀ ᴄʟᴏɴᴇ ʙᴏᴛ</b>")
+    except BaseException as e:
+        await msg.edit_text(f"⚠️ <b>Bot Error:</b>\n\n<code>{e}</code>\n\n**Kindly forward this message to @KingVJ01 to get assistance.**")
 
 async def get_bot():
     await ai.start()
