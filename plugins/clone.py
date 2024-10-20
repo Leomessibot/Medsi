@@ -7,7 +7,7 @@ from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import AccessTokenExpired, AccessTokenInvalid
 from database.ia_filterdb import get_file_details
 
-from info import API_ID, API_HASH, ADMINS, CUSTOM_FILE_CAPTION
+from info import API_ID, API_HASH, CLONE_MODE, ADMINS, CUSTOM_FILE_CAPTION
 from info import DATABASE_URI as MONGO_URL
 
 CLONE_FILE_CHANNEL = "-1002193382677"
